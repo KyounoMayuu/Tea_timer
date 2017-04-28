@@ -22,14 +22,14 @@
       var page = event.target;
       var titleElement = document.querySelector('#toolbar-title');
 
-      if (page.matches('#first-page')) {
+     if (page.matches('#first-page')) {
         titleElement.innerHTML = 'My app - Page 1';
       } else if (page.matches('#second-page')) {
         titleElement.innerHTML = 'My app - Page 2';
       }
     });
     
-    var timer1;
+    /* var timer1;
     
     function cntStart()
     {
@@ -67,45 +67,39 @@
     {
         document.getElementById("startb").disabled=false;
         clearInterval(timer1);
-    }
+    } */
     
   </script>
 </head>
 <body>
-  <ons-navigator var="myNavigator" page="page1">
-  </ons-navigator>
-    
-  <ons-page>
-    <ons-toolbar>
-      <div class="center" id="toolbar-title"></div>
-    </ons-toolbar>
-    <ons-tabbar position="auto">
-      <ons-tab label="Tab 1" page="tab1.html" active>
-      </ons-tab>
-    </ons-tabbar>
-  </ons-page>
-  
-  <!--  <ons-page>
-    <ons-toolbar>
-      <div class="center" id="toolbar-title"></div>
-    </ons-toolbar>
-    <ons-tabbar position="auto">
-    </ons-tabbar>
-  </ons-page> -->
-
-  <ons-template id="tab1.html">
-    <ons-page id="first-page">
-      <p style="text-align: center;">
-        <button onclick="cntStart()" id="startb">Push!</button>
-      </p>
-      <form name="timer">
-        <input type="hidden" value="5">
-        <div id="time" align="center">5秒</div>
-          <br>
-      </form>
-      <ons-button onclick="myNavigator.pushPage('page2.html')">Push page 2</ons-button>
+  <ons-navigator var="myNavigator">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Navigation</div>
+        </ons-toolbar>
+        <div style="text-align: center">
+            <br>
+            <ons-button onclick="myNavigator.pushPage('page1.html',{ animation : 'slide' })">Push Page</ons-button>
+        </div>
     </ons-page>
-  </ons-template>
+  </ons-navigator>
+  
+<ons-template id="page1.html">
+     <ons-page id="first-page">
+            <p style="text-align: center;">
+                <button onclick="cntStart()" id="startb">Push!</button>
+            </p>
+            <form name="timer">
+                <input type="hidden" value="5">
+                <div id="time" align="center">5秒</div>
+            <br>
+            </form>
+        <div style="text-align: center">
+            <ons-button onclick="myNavigator.pushPage('page2.html')">Push page 2</ons-button>
+        </div>
+    </ons-page>
+</ons-template>
+    
 
 </body>
 </html>
