@@ -29,7 +29,25 @@
       }
     });
     
-    /* var timer1;
+    document.addEventListener('init', function(event) {
+      var page = event.target;
+
+      if (page.matches('#first-page')) {
+
+        page.querySelector('#push-button').onclick = function() {
+          document.querySelector('#navigator').pushPage('page2.html');
+        };
+
+      } else if (page.matches('#second-page')) {
+
+        page.querySelector('#pop-button').onclick = function() {
+          document.querySelector('#navigator').popPage();
+        };
+
+      }
+    });
+    
+    var timer1;
     
     function cntStart()
     {
@@ -56,6 +74,7 @@
             var se = document.timer.elements[0].value
             document.getElementById("time").innerHTML = se +"秒";
             alert("時間だよ！");
+            document.getElementById("push-button").disabled=false;
         }else{
             document.timer.elements[0].value = int % 60;
             var se = document.timer.elements[0].value
@@ -65,41 +84,58 @@
     
     function reSet()
     {
-        document.getElementById("startb").disabled=false;
+        // document.getElementById("startb").disabled=false;
         clearInterval(timer1);
-    } */
+    }
     
   </script>
 </head>
 <body>
-  <ons-navigator var="myNavigator">
-    <ons-page>
-        <ons-toolbar>
-            <div class="center">Navigation</div>
-        </ons-toolbar>
-        <div style="text-align: center">
-            <br>
-            <ons-button onclick="myNavigator.pushPage('page1.html',{ animation : 'slide' })">Push Page</ons-button>
-        </div>
-    </ons-page>
-  </ons-navigator>
+  <ons-navigator id="navigator" page="page1.html"></ons-navigator>
   
 <ons-template id="page1.html">
-     <ons-page id="first-page">
-            <p style="text-align: center;">
-                <button onclick="cntStart()" id="startb">Push!</button>
+    <ons-page id="first-page">
+      <ons-toolbar>
+        <div class="center">Page 1</div>
+      </ons-toolbar>
+      
+      <div class="content" style="text-align: center">
+      <p style="text-align: center;">
+          <form>
+            <select name="品種">
+            <option value="1">A</option>
+            <option value="2">B</option>
+            <option value="3">C</option>
+            </select>
+          </form>
+            <br>
+            <button onclick="cntStart()" id="startb">Push!</button>
             </p>
             <form name="timer">
                 <input type="hidden" value="5">
                 <div id="time" align="center">5秒</div>
             <br>
             </form>
-        <div style="text-align: center">
-            <ons-button onclick="myNavigator.pushPage('page2.html')">Push page 2</ons-button>
-        </div>
+        <p>タイマー終了後次に行ってくださいね。
+        </p>
+        <ons-button id="push-button" disabled>Push page</ons-button>
+      </div>
     </ons-page>
-</ons-template>
-    
+  </ons-template>
+  
+  <ons-template id="page2.html">
+    <ons-page id="second-page">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Page 1</ons-back-button></div>
+        <div class="center">Page 2</div>
+      </ons-toolbar>
+
+      <div class="content" style="text-align: center">
+        <p>This is the second page.</p>
+        <ons-button id="pop-button">Pop page</ons-button>
+      </div>
+    </ons-page>
+  </ons-template>
 
 </body>
 </html>
