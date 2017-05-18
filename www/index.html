@@ -92,6 +92,21 @@
         clearInterval(timer1);
     }
     
+    function nameSe()
+    {
+        var ty = document.pu.sina.value;
+        if (ty == 1){
+            document.getElementById("time").innerHTML = 1 + "分" + 0 + "秒";
+            document.timer.elements[0].value = 1;
+        }else if (ty == 2){
+            document.getElementById("time").innerHTML = 2 + "分" + 0 + "秒";
+            document.timer.elements[0].value = 2;
+        }else if (ty == 3){
+            document.getElementById("time").innerHTML = 3 + "分" + 0 + "秒";
+            document.timer.elements[0].value = 3;
+        }
+    }
+    
   </script>
 </head>
 <body>
@@ -100,13 +115,13 @@
 <ons-template id="page1.html">
     <ons-page id="first-page">
       <ons-toolbar>
-        <div class="center">Page 1</div>
+        <div class="center">蒸し時間用</div>
       </ons-toolbar>
       
       <div class="content" style="text-align: center">
       <p style="text-align: center;">
-          <form>
-            <select name="品種">
+          <form name="pu">
+            <select name="sina" onChange="nameSe()">
                 <option value="1">A</option>
                 <option value="2">B</option>
                 <option value="3">C</option>
