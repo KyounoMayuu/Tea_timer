@@ -47,6 +47,7 @@
       }
     });
     
+    var audio = document.getElementById("music");
     var timer1;
     
     function cntStart()
@@ -75,7 +76,8 @@
             document.timer.elements[1].value = int % 60;
             var se = document.timer.elements[1].value
             document.getElementById("time").innerHTML = se +"秒";
-            alert("時間だよ！");
+            new Audio("alarm.mp3").play();
+            document.getElementById("humi").innerHTML = "蒸らし終了です。<br>次のページへ進んでください。"
             document.getElementById("push-button").disabled=false;
         }else{
             document.timer.elements[0].value = Math.floor(int/60);
@@ -104,15 +106,23 @@
         }else if (ty == 3){
             document.getElementById("time").innerHTML = 3 + "分" + 0 + "秒";
             document.timer.elements[0].value = 3;
+        }else if (ty == 4){
+            document.getElementById("time").innerHTML = 0 + "分" + 5 + "秒";
+            document.timer.elements[0].value = 0;
+            document.timer.elements[1].value = 5;
         }
     }
     
   </script>
 </head>
 <body>
+  <AUDIO id="music">
+  <SOURCE src="alarm.mp3" type="audio/mp3">
+  </AUDIO>
+
   <ons-navigator id="navigator" page="page1.html"></ons-navigator>
   
-<ons-template id="page1.html">
+    <ons-template id="page1.html">
     <ons-page id="first-page">
       <ons-toolbar>
         <div class="center">蒸し時間用</div>
@@ -125,6 +135,7 @@
                 <option value="1">A</option>
                 <option value="2">B</option>
                 <option value="3">C</option>
+                <option value="4">test</option>
             </select>
             <select name="人数">
                 <option value="1">1</option>
@@ -141,8 +152,9 @@
                 <div id="time" align="center">1分0秒</div>
             <br>
             </form>
-        <p>タイマー終了後次に行ってくださいね。
-        </p>
+        <div id="humi">タイマー終了後次に行ってくださいね。
+        </div>
+        <br>
         <ons-button id="push-button" disabled>Push page</ons-button>
       </div>
     </ons-page>
